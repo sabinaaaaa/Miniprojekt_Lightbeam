@@ -27,7 +27,10 @@ void enumerate (json j) {
     int counter=0;
     for (auto it=j.begin() ; it != j.end(); it++ , counter++) {
         if(it->is_object())
+        {
+            std::cout << "key"<<counter <<": " << it.key() << " is object"<<std::endl;
             enumerate(it.value());
+        }
         else
             std::cout << "key"<<counter <<": " << it.key() << " : " << it.value() << std::endl;
     }
@@ -37,4 +40,17 @@ void enumerate (json j) {
     // find a nested key
     findNPrintKey(j, "firstParty");
     std::cout<<std::endl<<std::endl<<std::endl;
+}
+
+std::string* extractObjectKeys(json j)
+{
+    int counter = 0;
+    std::string* keys = new std::string[Count_Objects(j)];
+    for (auto it=j.begin() ; it != j.end(); it++, counter++) {
+        if(it->is_object())
+        {
+            keys[counter] = it.key();
+        }
+    }
+    return keys;
 }

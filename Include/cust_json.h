@@ -6,6 +6,7 @@
 #define MINIPROJEKT_LIGHTBEAM_CUST_JSON_H
 #include "json.hpp"
 #include <iostream>
+#include <string>
 using json=nlohmann::json;
 /**
  * @brief Count_Objects Count the nested objects of a
@@ -24,4 +25,12 @@ void enumerate (json j);
  * @param key
  */
 void findNPrintKey (json src, const std::string& key);
+
+/**
+ * @brief
+ * @param j
+ * @param keys
+ */
+std::string* extractObjectKeys(json j);
+
 #endif //MINIPROJEKT_LIGHTBEAM_CUST_JSON_H
