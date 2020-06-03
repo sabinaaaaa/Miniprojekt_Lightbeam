@@ -4,11 +4,20 @@
 #include "cust_json.h"
 using json=nlohmann::json;
 using namespace std;
-
+#define PERSON 1
+/* 1- Ivaylo
+ * 2- Sabina
+ * 3- Matviy
+ */
 int main() {
     json lightbeam;
     ifstream lightb;
+    if(PERSON==2)
     lightb.open(R"(C:\Users\Sabina\CLionProjects\Miniprojekt_Lightbeam\Json files\lightbeamData.json)", ifstream::in);
+    else if(PERSON==1)
+        lightb.open(R"(D:\FH-SWF\2. Semester\Grundlagen der Informatik 2\LIGHTBEAM REPO\Miniprojekt_Lightbeam\Json files\lightbeamData.json)", ifstream::in);
+    else if(PERSON==3)
+        lightb.open(R"()", ifstream::in);
     lightb>>lightbeam;
     enumerate(lightbeam);
     cout<<"Expected value: 9"<<endl;
