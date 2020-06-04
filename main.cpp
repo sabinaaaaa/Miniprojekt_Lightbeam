@@ -2,6 +2,7 @@
 #include "json.hpp"
 #include <fstream>
 #include "cust_json.h"
+#include "graph.h"
 using json=nlohmann::json;
 using namespace std;
 #define PERSON 1
@@ -30,7 +31,14 @@ int main() {
         cout<<keys[i]<<endl;
     }
 
-    cout<<lightbeam[keys[8]]["thirdParties"][4]<<endl;
+    cout<<lightbeam[keys[8]]["thirdParties"][4]<<endl<<endl;
+    Graph lightbeamgraph(lightbeam);
+    lightbeamgraph.printVertices();
+/*    string test="test";
+    string apple="apple";
+    string tapple="test apple";
+    cout<<test.compare(apple)<<"   "<<test.compare(tapple)<<"   "<<apple.compare(tapple)<<"   "
+    <<test.compare(test)<<"   "<<test.compare("glkm")<<endl;*/
 
     return 0;
 }

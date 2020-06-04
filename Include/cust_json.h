@@ -5,13 +5,14 @@
 #ifndef MINIPROJEKT_LIGHTBEAM_CUST_JSON_H
 #define MINIPROJEKT_LIGHTBEAM_CUST_JSON_H
 #include "json.hpp"
+#include "vertex.h"
 #include <iostream>
 #include <string>
 using json=nlohmann::json;
 /**
- * @brief Count_Objects Count the nested objects of a
- * @param j
- * @return
+ * @brief Count_Objects Count the nested objects in a json
+ * @param j-  json object
+ * @return returns the count of nested objects
  */
 int Count_Objects(json &j);
 /**
@@ -27,9 +28,9 @@ void enumerate (json j);
 void findNPrintKey (json src, const std::string& key);
 
 /**
- * @brief
- * @param j
- * @param keys
+ * @brief Extracts all nested object keys off a json
+ * @param j The main json object
+ * @return returns a string pointer containing all object keys
  */
 std::string* extractObjectKeys(json j);
 
