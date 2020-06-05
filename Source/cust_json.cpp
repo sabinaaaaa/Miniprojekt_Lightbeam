@@ -46,10 +46,10 @@ std::string* extractObjectKeys(json j)
 {
     int counter = 0;
     std::string* keys = new std::string[Count_Objects(j)];
-    for (auto it=j.begin() ; it != j.end(); it++, counter++) {
+    for (auto it=j.begin() ; it != j.end(); it++) {
         if(it->is_object())
         {
-            keys[counter] = it.key();
+            keys[counter++] = it.key();
         }
     }
     return keys;
