@@ -16,24 +16,16 @@ int main() {
     if(PERSON==2)
     lightb.open(R"(C:\Users\Sabina\CLionProjects\Miniprojekt_Lightbeam\Json files\lightbeamData.json)", ifstream::in);
     else if(PERSON==1)
-        lightb.open(R"(D:\FH-SWF\2. Semester\Grundlagen der Informatik 2\LIGHTBEAM REPO\Miniprojekt_Lightbeam\Json files\lightbeamData.json)", ifstream::in);
+        lightb.open(R"(D:\FH-SWF\2. Semester\Grundlagen der Informatik 2\LIGHTBEAM REPO\Miniprojekt_Lightbeam\Json files\lightbeamData2.json)", ifstream::in);
     else if(PERSON==3)
         lightb.open(R"()", ifstream::in);
     lightb>>lightbeam;
-    enumerate(lightbeam);
+//    enumerate(lightbeam);
     cout<<"Expected value: 9"<<endl;
     cout<<"Object count: "<<Count_Objects(lightbeam)<<endl;
-
-    string* keys = new string[Count_Objects(lightbeam)];
-
-    for(int i = 0; i<Count_Objects(lightbeam); i++){
-        keys[i] = extractObjectKeys(lightbeam)[i];
-        cout<<keys[i]<<endl;
-    }
-
-    cout<<lightbeam[keys[8]]["thirdParties"][4]<<endl<<endl;
     Graph lightbeamgraph(lightbeam);
     lightbeamgraph.printVertices();
+    lightbeamgraph.debug();
 /*    string test="test";
     string apple="apple";
     string tapple="test apple";

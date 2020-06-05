@@ -14,7 +14,10 @@ public:
     void ins_json_edges();
     void extractVertNames();
     void fill_adjMatrix();
+    unsigned findVertexId(std::string name);
     void printVertices();
+    void debug();
+    void objDebug();
     ~Graph();
 
 protected:
@@ -22,6 +25,6 @@ protected:
     unsigned vertCount;
     short* adjMatrix; // since the values will only be 0 and 1
     json object;
-//    std::string* keys;
+    std::string* keys;
 };
 #endif //MINIPROJEKT_LIGHTBEAM_GRAPH_H
