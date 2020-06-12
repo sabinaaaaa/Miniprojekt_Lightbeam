@@ -120,6 +120,55 @@ void Graph::debug() {
     }
 }
 
+void Graph::BFS(unsigned int start){
+    for(int i=0; i<this->vertCount; ++i){
+        this->vertices[i].setColor(vertex::WHITE);
+        this->vertices[i].setDistance(UNENDING);
+        this->vertices[i].setParentId(NIL);
+    }
+    this->vertices[start].setColor(vertex::GRAY);
+    this->vertices[start].setDistance(0);
+    this->vertices[start].setParentId(NIL);
+    Queue Q;
+    Q.enqueue(start);
+    unsigned u;
+    while(Q.getCurrAmt()!=0){
+        u=Q.dequeue();
+        for(int i=0;i<this->vertCount;++i){
+            if(this->adjMatrix[u*this->vertCount+i]!=1) continue;
+            else if(this->vertices[i].getColor()==vertex::WHITE){
+                this->vertices[i].setColor(vertex::GRAY);
+                //G.V[i].d=G.V[u].d +1;
+                this->vertices[i].setDistance(this->vertices[u].getDistance()+1);
+                //G.V[i].vorgaenger=u;
+                this->vertices[i].setParentId(u);
+                //ENQUEUE(Q,i);
+                Q.enqueue(i);
+            }
+        }
+        //G.V[u].farbe=SCHWARZ;
+        this->vertices[u].setColor(vertex::BLACK);
+    }
+}
+
+void Graph::printPath(unsigned int start, unsigned int end){
+    this->BFS(start);
+    std::cout<<"Der kuerzeste Weg von Knote "<<start<<" nach Knote "<<end<<" ist folgender: "<<std::endl;
+    //int save=v;
+    unsigned save=end;
+    //int prev;
+    unsigned prev;
+    while(end!=NIL){
+        prev=end;
+        if(end!=start)
+            std::cout<<end<<", ";
+        else std::cout<<end;
+        //v=G.V[v].vorgaenger;
+        end=this->vertices[end].getParentId();
+    }
+    if(prev!=start) std::cout<<"Kein Pfad von Knote "<<save<<" nach Knote: "<<start<<std::endl;
+    std::cout<<std::endl;
+}
 Graph::~Graph() {
     delete[] this->adjMatrix;
     delete[] this->vertices;

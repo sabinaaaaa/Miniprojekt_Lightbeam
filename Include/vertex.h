@@ -7,8 +7,13 @@
 
 #include <string>
 #include <iostream>
+#include <climits>
+#define UNENDING UINT16_MAX
+#define NIL -1
 class vertex{
 public:
+    vertex();
+    enum color{WHITE, GRAY, BLACK};
     bool is_thirdParty();
     bool is_firstParty();
     void setId(unsigned id);
@@ -16,7 +21,17 @@ public:
     void setName(std::string name);
     std::string getName();
     void print();
+    vertex &operator=(const vertex &vertex);
+    void setColor(color color);
+    color getColor();
+    void setDistance(unsigned distance);
+    unsigned getDistance();
+    void setParentId(unsigned parentId);
+    unsigned getParentId();
 private:
+    color color;
+    unsigned distance;
+    unsigned parentId;
     unsigned vertId;
     std::string name;
     bool firstParty;
