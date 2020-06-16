@@ -5,6 +5,7 @@
 #ifndef MINIPROJEKT_LIGHTBEAM_GRAPH_H
 #define MINIPROJEKT_LIGHTBEAM_GRAPH_H
 #include "vertex.h"
+#include "Queue.h"
 #include "cust_json.h"
 #include <string>
 #include <limits>
@@ -18,6 +19,8 @@ public:
     void printVertices();
     void debug();
     void objDebug();
+    void BFS(unsigned start);
+    void printPath(unsigned start, unsigned end);
     ~Graph();
 
 protected:

@@ -20,17 +20,14 @@ int main() {
     else if(PERSON==3)
         lightb.open(R"()", ifstream::in);
     lightb>>lightbeam;
-//    enumerate(lightbeam);
+
     cout<<"Expected value: 9"<<endl;
     cout<<"Object count: "<<Count_Objects(lightbeam)<<endl;
     Graph lightbeamgraph(lightbeam);
     lightbeamgraph.printVertices();
     lightbeamgraph.debug();
-/*    string test="test";
-    string apple="apple";
-    string tapple="test apple";
-    cout<<test.compare(apple)<<"   "<<test.compare(tapple)<<"   "<<apple.compare(tapple)<<"   "
-    <<test.compare(test)<<"   "<<test.compare("glkm")<<endl;*/
+    lightbeamgraph.BFS(18);
+    lightbeamgraph.printPath(19,3);
 
     return 0;
 }
