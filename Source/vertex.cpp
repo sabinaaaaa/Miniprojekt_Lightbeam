@@ -45,8 +45,8 @@ std::string vertex::getName() {
 
 void vertex::print() {
     std::cout << "Vertex name: " << this->name << std::endl
-              << "Vertex id: " << this->vertId << std::endl
-              << "First party: " << this->firstParty << std::endl;
+              << "Vertex id: " << this->vertId << std::endl;
+              //<< "First party: " << this->firstParty << std::endl;
 }
 
 vertex &vertex::operator=(const vertex &vertex) {

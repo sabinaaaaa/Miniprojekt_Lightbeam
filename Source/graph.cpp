@@ -25,14 +25,11 @@ Graph::Graph(json obj) {
         //adjMatrix[i] = INT16_MAX; // fill the matrix with 'infinity' numbers
         adjMatrix[i] = 0; // fill the matrix with zeros
     }
-    cout << "debug1";
     this->extractVertNames();
-    cout << "debug2";
-    this->objDebug();
+    //this->objDebug();
 //    for(int i=0;i<this->vertCount;++i)
 //        cout<<this->keys[i];
     this->fill_adjMatrix();
-    cout << "debug3";
 }
 
 void Graph::objDebug() {
@@ -43,7 +40,6 @@ void Graph::fill_adjMatrix() {
     int counter;
     unsigned currId = INT16_MAX;
     int i = 0;
-    cout << this->findVertexId("fonts.googleapis.com");
     for (auto it = this->object.begin(); it != this->object.end(); it++, ++i) {
         counter = 0;
         if (it->is_object()) {
@@ -62,6 +58,7 @@ unsigned Graph::findVertexId(std::string name) {
             return this->vertices[i].getId();
     }
     throw runtime_error("Id wasn't found(findVertexId)");
+    //throw "Id wasn't found(findVertexId)";
 }
 
 void Graph::extractVertNames() {
