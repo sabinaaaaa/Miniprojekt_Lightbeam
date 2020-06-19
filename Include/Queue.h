@@ -1,11 +1,13 @@
 //
-// Created by bgbg5 on 6/9/2020.
+// Created by I. Marinov on 6/9/2020.
 //
 
 #ifndef MINIPROJEKT_LIGHTBEAM_QUEUE_H
 #define MINIPROJEKT_LIGHTBEAM_QUEUE_H
 #include "vertex.h"
-
+/**
+ * @brief Queue type to be used with the BFS- algorithm for graphs
+ */
 class Queue{
 public:
     struct node{

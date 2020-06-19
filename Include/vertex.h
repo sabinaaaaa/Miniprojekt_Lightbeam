@@ -1,5 +1,5 @@
 //
-// Created by bgbg5 on 6/2/2020.
+// Created by I. Marinov on 6/2/2020.
 //
 
 #ifndef MINIPROJEKT_LIGHTBEAM_VERTEX_H

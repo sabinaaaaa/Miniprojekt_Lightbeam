@@ -11,6 +11,7 @@ using namespace std;
  * 3- Matviy
  */
 int main() {
+    /*
     json lightbeam;
     ifstream lightb;
     if(PERSON==2)
@@ -20,14 +21,12 @@ int main() {
     else if(PERSON==3)
         lightb.open(R"()", ifstream::in);
     lightb>>lightbeam;
-
-    //cout<<"Expected value: 9"<<endl;
-    //cout<<"Object count: "<<Count_Objects(lightbeam)<<endl;
     Graph lightbeamgraph(lightbeam);
     lightbeamgraph.printVertices();
     lightbeamgraph.debug();
     lightbeamgraph.BFS(18);
     lightbeamgraph.printPath(19,3);
+     */
 
     return 0;
 }

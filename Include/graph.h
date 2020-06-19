@@ -1,5 +1,5 @@
 //
-// Created by bgbg5 on 6/3/2020.
+// Created by I. Marinov on 6/3/2020.
 //
 
 #ifndef MINIPROJEKT_LIGHTBEAM_GRAPH_H

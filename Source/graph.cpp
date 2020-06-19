@@ -1,5 +1,5 @@
 //
-// Created by bgbg5 on 6/3/2020.
+// Created by I. Marinov on 6/3/2020.
 //
 #include "graph.h"
 
@@ -8,7 +8,7 @@ using namespace std;
 /**
  * @brief - saves object in the Graph
  * - counts vertices, gets their names, sets their ids
- * - allocates the adjacency matrix
+ * - allocates and fills the adjacency matrix
  *
  * @param obj a json object that contains the vertices from a lightbeam .json file
  */
@@ -25,17 +25,21 @@ Graph::Graph(json obj) {
         //adjMatrix[i] = INT16_MAX; // fill the matrix with 'infinity' numbers
         adjMatrix[i] = 0; // fill the matrix with zeros
     }
-    this->extractVertNames();
+    this->extractVertNames(); // get the vertices' names(website names)
     //this->objDebug();
 //    for(int i=0;i<this->vertCount;++i)
 //        cout<<this->keys[i];
-    this->fill_adjMatrix();
+    this->fill_adjMatrix(); // fill the adjancecy matrix of the  graph
 }
-
+/**
+ * @brief 'deeply' iterate the json object and print all of its keys and values
+ */
 void Graph::objDebug() {
     enumerate(this->object);
 }
-
+/**
+ * @brief Fills the adjacency matrix of the current graph(inserts the edges extracted from the .json file
+ */
 void Graph::fill_adjMatrix() {
     int counter;
     unsigned currId = INT16_MAX;
@@ -51,7 +55,11 @@ void Graph::fill_adjMatrix() {
         }
     }
 }
-
+/**
+ * @brief Find the id of a vertex with a given name
+ * @param name name of the vertex(website)
+ * @return id of the vertex with the given name
+ */
 unsigned Graph::findVertexId(std::string name) {
     for (int i = 0; i < this->vertCount; ++i) {
         if (this->vertices[i].getName() == name)
@@ -60,25 +68,32 @@ unsigned Graph::findVertexId(std::string name) {
     throw runtime_error("Id wasn't found(findVertexId)");
     //throw "Id wasn't found(findVertexId)";
 }
-
+/**
+ * @brief extract the website "hostnames" from the json object
+ */
 void Graph::extractVertNames() {
     this->keys = extractObjectKeys(this->object);
     for (int i = 0; i < this->vertCount; ++i) { // iterate through the vertices and get their names from the object
         vertices[i].setName(this->object[this->keys[i]]["hostname"]);
     }
 }
-
+/**
+ * @brief Prints the names and ids of all vertices
+ */
 void Graph::printVertices() {
     for (int i = 0; i < this->vertCount; ++i) {
         vertices[i].print();
     }
 }
-
+/**
+ * @brief Prints the adjacency matrix of the graph
+ */
 void Graph::debug() {
     cout << endl << "Adjazentmatrix:" << endl << endl;
 
     cout << "  ";
-    //Spaltennamen
+    //*************** Columns ******************************
+    //this loop only prints the first row of the matrix where the column names/ids are
     for (int x = 0; x < this->vertCount; x++) {
         if (this->vertices[x].getName() == "" || this->vertices->getName().length() > 2) {
             if (x >= 10 && x < 100)
@@ -91,16 +106,21 @@ void Graph::debug() {
             cout << "   " << this->vertices[x].getName();
     }
     cout << endl;
+    // ************ end of column names *******************
 
-    for (int i = 0; i < this->vertCount; i++)  //Für jeden Knoten
+    //***************** ROWS ***********************
+    for (int i = 0; i < this->vertCount; i++)  //for each vertex
     {
+        /*********** line separator ****************/
         cout << "   ";
-        for (int m = 0; m < this->vertCount; m++)  //Zeilentrenner
+        for (int m = 0; m < this->vertCount; m++)
         {
             cout << "----";
         }
         cout << endl;
-        //Zeilennamen
+        /************ end of line separator ************/
+
+        /************ row names/ids **************/
         if (this->vertices[i].getName() == "" || this->vertices->getName().length() > 2) {
             if (i >= 10)
                 cout << i << "";
@@ -108,15 +128,23 @@ void Graph::debug() {
                 cout << i << " ";
         } else
             cout << this->vertices[i].getName() << " ";
+        /*********** end of row names/ids print ***********/
 
+        /*********** print values ***************/
         for (int j = 0; j < this->vertCount; j++) //Spaltentrenner und adjazents zwischen zwei Knoten(1 oder 0)
         {
             cout << " | " << this->adjMatrix[i * vertCount + j];
         }
         cout << endl;
+        /**********end of values printing ********/
+        /*************end of ROWS ****************/
     }
 }
-
+/**
+ * @brief Iterates through the graph with a given start vertex and finds all reachable vertices and the distance
+ * required to reach them. Algorithm explained in the book  Algorithmen – Eine Einführung
+ * @param start Starting vertex
+ */
 void Graph::BFS(unsigned int start){
     for(int i=0; i<this->vertCount; ++i){
         this->vertices[i].setColor(vertex::WHITE);
@@ -135,37 +163,37 @@ void Graph::BFS(unsigned int start){
             if(this->adjMatrix[u*this->vertCount+i]!=1) continue;
             else if(this->vertices[i].getColor()==vertex::WHITE){
                 this->vertices[i].setColor(vertex::GRAY);
-                //G.V[i].d=G.V[u].d +1;
                 this->vertices[i].setDistance(this->vertices[u].getDistance()+1);
-                //G.V[i].vorgaenger=u;
                 this->vertices[i].setParentId(u);
-                //ENQUEUE(Q,i);
                 Q.enqueue(i);
             }
         }
-        //G.V[u].farbe=SCHWARZ;
         this->vertices[u].setColor(vertex::BLACK);
     }
 }
-
+/**
+ * @brief Finds the *shortest path between two points. Requires a run BFS-algorithm run
+ * @param start Starting vertex of the path
+ * @param end Ending vertex of the path
+ */
 void Graph::printPath(unsigned int start, unsigned int end){
     this->BFS(start);
     std::cout<<"Der kuerzeste Weg von Knote "<<start<<" nach Knote "<<end<<" ist folgender: "<<std::endl;
-    //int save=v;
     unsigned save=end;
-    //int prev;
     unsigned prev;
     while(end!=NIL){
         prev=end;
         if(end!=start)
             std::cout<<end<<", ";
         else std::cout<<end;
-        //v=G.V[v].vorgaenger;
         end=this->vertices[end].getParentId();
     }
     if(prev!=start) std::cout<<"Kein Pfad von Knote "<<save<<" nach Knote: "<<start<<std::endl;
     std::cout<<std::endl;
 }
+/**
+ * @brief deletes all of the allocated memory
+ */
 Graph::~Graph() {
     delete[] this->adjMatrix;
     delete[] this->vertices;
