@@ -4,7 +4,11 @@
 #include "graph.h"
 
 using namespace std;
-
+Graph::Graph() {
+    this->adjMatrix=nullptr;
+    this->vertices= nullptr;
+    this->keys= nullptr;
+}
 /**
  * @brief - saves object in the Graph
  * - counts vertices, gets their names, sets their ids
@@ -36,6 +40,25 @@ Graph::Graph(json obj) {
  */
 void Graph::objDebug() {
     enumerate(this->object);
+}
+void Graph::init(json obj) {
+    this->object = obj; // copy the given object
+    vertCount = Count_Objects(this->object); // get vertices count
+    vertices = new vertex[vertCount]; // allocate memory for the vertices read
+    for (int i = 0; i < this->vertCount; ++i) {
+        vertices[i].setId(i); // give incrementing ids to all vertices
+    }
+
+    adjMatrix = new short[vertCount * vertCount]; // allocate memory for the
+    for (int i = 0; i < this->vertCount * this->vertCount; ++i) {
+        //adjMatrix[i] = INT16_MAX; // fill the matrix with 'infinity' numbers
+        adjMatrix[i] = 0; // fill the matrix with zeros
+    }
+    this->extractVertNames(); // get the vertices' names(website names)
+    //this->objDebug();
+//    for(int i=0;i<this->vertCount;++i)
+//        cout<<this->keys[i];
+    this->fill_adjMatrix(); // fill the adjancecy matrix of the  graph
 }
 /**
  * @brief Fills the adjacency matrix of the current graph(inserts the edges extracted from the .json file
@@ -190,6 +213,18 @@ void Graph::printPath(unsigned int start, unsigned int end){
     }
     if(prev!=start) std::cout<<"Kein Pfad von Knote "<<save<<" nach Knote: "<<start<<std::endl;
     std::cout<<std::endl;
+}
+void Graph::printPath(std::string start, std::string end) {
+    int id_start=this->findVertexId(start);
+    int id_end=this->findVertexId(end);
+    this->printPath(id_end, id_start);
+}
+/**
+ * @brief Check if the matrix is empty(if all of its pointers equal nullptr
+ * @return Evaluates true if all pointers equal nullptr
+ */
+bool Graph::isEmpty() {
+    return this->keys==nullptr && this->vertices== nullptr && this->adjMatrix== nullptr;
 }
 /**
  * @brief deletes all of the allocated memory

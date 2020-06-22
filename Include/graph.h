@@ -11,7 +11,9 @@
 #include <limits>
 class Graph{
 public:
-    Graph(json obj);
+    Graph();
+    Graph(json obj); //
+    void init(json obj); // init from an json object
     void ins_json_edges();
     void extractVertNames();
     void fill_adjMatrix();
@@ -21,6 +23,8 @@ public:
     void objDebug();
     void BFS(unsigned start);
     void printPath(unsigned start, unsigned end);
+    void printPath(std::string start, std::string end);
+    bool isEmpty();
     ~Graph();
 
 protected:
