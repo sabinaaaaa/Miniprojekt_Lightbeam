@@ -64,10 +64,13 @@ int main() {
         //print menu options
         std::cout << "Program Menu\n"
                      "1- Choose a directory path\n"
-                     "2- Read a LightBeam graph from a \".json\" file in the directory path. Only specify the file name i.e lbdata.json\n"
+                     "2- Read a graph-file from the directory path. Only specify the file name i.e testgraph \n"
                      "3- Print Adjacency Matrix of the graph\n"
-                     "4- Find path and distance between two vertices(using id's)\n"
-                     "5- Find path and distance between two vertices(using vertex names)\n"
+                     //"4- Print Weight Matrix of the graph\n"
+                     "4- Find path and distance(using BFS) between two vertices(using id's)\n"
+                     "5- Find path and distance(using BFS) between two vertices(using vertex names)\n"
+                     //"6- Find path and distance(using Dijkstra) between two vertices(using id's)\n"
+                     //"7- Find path and distance(using Dijkstra) between two vertices(using vertex names)\n"
                      "e- Exit the program\n";
         std::cin >> opt; // ask user for input (choose an option from the menu)
         clearBuffer();
@@ -132,7 +135,7 @@ int main() {
                 Graph.init(obj);
                 break;
             case '3': // print the adjacency matrix of the graph
-                Graph.debug();
+                Graph.printAdjMatrix();
                 break;
             case '4': // find path and distance between two vertices with THEIR IDs
                 std::cout<<"Please enter a starting vertex(using id).\n";
@@ -152,6 +155,7 @@ int main() {
                 Graph.printPath(s_end, s_start);
                 clearBuffer();
                 break;
+            case 'e': break;
             default: // when option isn't found
                 std::cout << "Please enter a valid option from the menu.\n";
                 Pause();

@@ -111,7 +111,7 @@ void Graph::printVertices() {
 /**
  * @brief Prints the adjacency matrix of the graph
  */
-void Graph::debug() {
+void Graph::printAdjMatrix() {
     cout << endl << "Adjazentmatrix:" << endl << endl;
 
     cout << "  ";
