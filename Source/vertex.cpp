@@ -1,5 +1,5 @@
 //
-// Created by bgbg5 on 6/3/2020.
+// Created by I. Marinov on 6/3/2020.
 //
 #include "vertex.h"
 vertex::vertex() {

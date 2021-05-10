@@ -1,5 +1,5 @@
 //
-// Created by bgbg5 on 6/9/2020.
+// Created by I. Marinov on 6/9/2020.
 //
 
 #include "Queue.h"
