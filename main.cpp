@@ -9,7 +9,6 @@ using json = nlohmann::json;
  * 3- Matviy
  */
 int main() {
-    menu();
-
+    Menu menu;
     return 0;
 }
