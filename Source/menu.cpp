@@ -10,12 +10,12 @@ std::string Menu::dirPathMenu() {
     char opt;
     clearBuffer();
     std::cout << "Current path is: \"" << ((this->dirPath != "") ? dirPath : "No path") <<
-              "\". Do you wish to change it?(y/n)\n";
+              "\".\nDo you wish to change it?(y/n)\n";
     std::cin >> opt;
     clearBuffer();
 
     if (opt == 'y' || opt == 'Y') {
-        std::cout << "Enter the new directory path.(i.e C:/example/.../example) \n";
+        std::cout << "Enter the new directory path.(i.e C:/example/.../example)\n";
         std::getline(std::cin, this->dirPath);
         std::cout << "Path was set to: \"" +
                      ((dirPath != "") ? dirPath : "No path") + "\"";
@@ -23,8 +23,11 @@ std::string Menu::dirPathMenu() {
 //(condition) ? (if_true) : (if_false)
         std::cout << "Directory path was not changed. Current path is: \"" +
                      ((dirPath != "") ? dirPath : "No path") + "\"";
-        dirPath += "/";
     }
+    char lastChar = *std::prev(dirPath.end()).base();
+    if (&lastChar != "/" | &lastChar != "\\")
+        dirPath += "/";
+
     Pause();
     return dirPath;
 }
@@ -58,8 +61,7 @@ void Menu::menu() {
  * 4- Find path and distance between two vertices(using vertex names)
  * e- Exit the program
  * */
-    std::cout << "If you are using this program for the first time we recommend looking at the README first.\n"
-                 "Else press Enter to continue";
+    std::cout << "If you are using this program for the first time we recommend looking at the README first.\n";
     Pause();
     //clearBuffer();
     //clearConsole();
@@ -166,13 +168,18 @@ void Menu::BFS_path_menu_names() {
 }
 
 void Menu::printMatrix() {
-    if(graph.isEmpty())
-    {
+    if (graph.isEmpty()) {
         printf("Read a JSON file first.\n");
         clearBuffer();
         return;
     }
     graph.printAdjMatrix();
+}
+
+int Menu::isValidDirPath() {
+    struct stat stat;
+    if(stat())
+    return 0;
 }
 
 /**

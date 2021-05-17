@@ -36,6 +36,7 @@ private:
     void BFS_path_menu_names();
     void printMatrix();
     void menu();
+    isValidDirPath();
 };
 
 

@@ -165,7 +165,7 @@ void Graph::printAdjMatrix() {
 }
 /**
  * @brief Iterates through the graph with a given start vertex and finds all reachable vertices and the distance
- * required to reach them. Algorithm explained in the book  Algorithmen – Eine Einführung
+ * between them. Algorithm explained in the book  Algorithmen – Eine Einführung
  * @param start Starting vertex
  */
 void Graph::BFS(unsigned int start){
