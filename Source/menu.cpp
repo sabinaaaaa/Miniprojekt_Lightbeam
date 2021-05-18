@@ -176,11 +176,6 @@ void Menu::printMatrix() {
     graph.printAdjMatrix();
 }
 
-int Menu::isValidDirPath() {
-    struct stat stat;
-    if(stat())
-    return 0;
-}
 
 /**
  * @brief Clear buffer of any unwanted input.
